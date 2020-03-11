@@ -1,0 +1,59 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+}
+
+.btn-grid{
+    display: grid;
+    margin-right: 10rem;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: purple;
+    border-color: purple;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    color: #fff;
+    background-color: rgb(102, 1, 102);
+    border-color: rgb(102, 1, 102);
+    box-shadow: 0 0 0 0.2rem rgb(92, 8, 92));
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: rgb(102, 1, 102);
+    border-color: rgb(102, 1, 102);
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: purple;
+    border-color: purple;
+    margin: 5px;
+}
+
+.choices {
+    padding: 5px;
+}
+
+#question {
+    padding: 15px;
+}
+
+#intro-container {
+    display: block;
+}
+
+#question-container {
+    display: none;
+}
+
+#score-container {
+    display: none;
+}
