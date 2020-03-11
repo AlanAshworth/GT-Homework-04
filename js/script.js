@@ -4,7 +4,7 @@ var challengePane = {
     "To answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
 };
 
-var questionSet = [
+var questions = [
   {
     question: "Commonly used data types DO NOT include:",
     choices: ["strings", "booleans", "alerts", "numbers"],
@@ -40,9 +40,10 @@ var questionSet = [
   }
 ];
 // DOM ------------------------------------------------------------------------
-const intro = document.getElementById("intro-container");
-const quiz = document.getElementById("question-container");
-const prompt = document.getElementById("question");
+const introContainer = document.getElementById("intro-container");
+const startContainer = document.getElementById("start-quiz");
+const quizContainer = document.getElementById("question-container");
+const question = document.getElementById("question");
 const choice1 = document.getElementById("choice1");
 const choice2 = document.getElementById("choice2");
 const choice3 = document.getElementById("choice3");
@@ -53,23 +54,56 @@ const timer = document.getElementById("timer");
 let runningQuestionIndex = 0;
 
 
+startContainer.addEventListener("click", function(){
+  introContainer.setAttribute("style", "display: none");
+  quizContainer.setAttribute("style", "display: block");
+  renderQuestion();
+})
+
+choice1.addEventListener("click", function(){
+  
+  // runningQuestionIndex++;
+  // renderQuestion();
+  checkAnswer();
+})
+choice2.addEventListener("click", function(){
+  // runningQuestionIndex++;
+  // renderQuestion();
+  checkAnswer();
+})
+choice3.addEventListener("click", function(){
+  // runningQuestionIndex++;
+  // renderQuestion();
+  checkAnswer();
+})
+choice4.addEventListener("click", function(){
+  // runningQuestionIndex++;
+  // renderQuestion();
+  checkAnswer();
+})
 
 // functions
 function renderQuestion(){
-    let q = questionSet[runningQuestionIndex];
-    prompt.innerHTML = "<h3>" + q.question + "</h3>";
-    choice1.innerHTML = q.choices[0];
-    choice2.innerHTML = q.choices[1];
-    choice3.innerHTML = q.choices[2];
-    choice4.innerHTML = q.choices[3];
+    let currentQuestion = questions[runningQuestionIndex];
+    question.innerHTML = "<h3>" + currentQuestion.question + "</h3>";
+    choice1.innerHTML = currentQuestion.choices[0];
+    choice2.innerHTML = currentQuestion.choices[1];
+    choice3.innerHTML = currentQuestion.choices[2];
+    choice4.innerHTML = currentQuestion.choices[3];
 }
 
 function checkAnswer(answer){
-    if (answer == questionSet.runningQuestionIndex.correctAnswer){
-        // answer is correct. add 10 seconds
-    } else{
-        // answer is wrong. remove 15 seconds
-    }
+  console.log(answer);
+  // if (answer == questions.runningQuestionIndex.correctAnswer){
+  //       console.log(answer);
+  //       // answer is correct. add 10 seconds
+  //       // increment question
+  //   } else{
+  //     console.log(answer);
+  //     console.log("not correct!");
+  //       // answer is wrong. remove 15 seconds
+  //       // increment question
+  //   }
     // if (runningQuestionIndex < lastQuestionIndex){
     //     runningQuestionIndex++;
     //     renderQuestion();
@@ -77,8 +111,10 @@ function checkAnswer(answer){
     renderQuestion();
 }
 
-function isCorrectAnswer(){
-    document.getElementById(runningQuestionIndex).style
+function nextQuestion(){
+  choice1.addEventListener("click", function(){
+    this.questions[runningQuestionIndex++];
+  })
 }
 
 // Interval -------------------------------------------------------------------
@@ -97,6 +133,3 @@ function countDownTimer() {
 }
 
 // Calls ----------------------------------------------------------------------
-intro.style.display = "none";
-renderQuestion();
-quiz.style.display = "block";
