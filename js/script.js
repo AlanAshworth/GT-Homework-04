@@ -9,6 +9,7 @@ const choice2El = document.getElementById("choice2");
 const choice3El = document.getElementById("choice3");
 const choice4El = document.getElementById("choice4");
 const timerEl = document.getElementById("timer");
+const scoreEl = document.getElementById("displayScore");
 
 var questionIndex = 0;
 var timeInterval;
@@ -36,7 +37,7 @@ function triggerQuizChallenge() {
     introContainerEl.setAttribute("style", "display: none");
     quizContainerEl.setAttribute("style", "display: block");
     renderQuestion();
-    countDown();
+    countDownTimer();
   });
 }
 
@@ -57,11 +58,11 @@ function checkAnswer(answer) {
     console.log(
       answer + " does not equal " + questions[questionIndex].correctAnswer);
     // Remove 15 seconds from the setTimeout timer.
-    timeLeft -= 15;
+    deductTime();
   }
   if (questionIndex >= questions.length - 1) {
     // Stop the timer
-    clearInterval(timeInterval);
+    stopCountDownTimer();
     console.log(timeLeft);
     // Show the next screen
     triggerScoreBoard();
@@ -74,19 +75,28 @@ function checkAnswer(answer) {
 function triggerScoreBoard() {
   quizContainerEl.setAttribute("style", "display: none");
   scoreContainerEl.setAttribute("style", "display: block");
+  scoreEl.textContent = "Your score is " + timeLeft;
 }
 
-function countDown() {
-  timeInterval = setInterval(function() {
+function countDownTimer() {
+  timeInterval = setInterval(function(){
     timeLeft--;
     timerEl.textContent = "Time " + timeLeft;
 
     if (timeLeft < 0) {
-      clearInterval(timeInterval);
+      stopCountDownTimer();
       timerEl.textContent = "Time";
       triggerScoreBoard();
     }
   }, 1000);
+}
+
+function deductTime(){
+  timeLeft -= 15;
+}
+
+function stopCountDownTimer(){
+  clearInterval(timeInterval);
 }
 
 // Objects --------------------------------------------------------------------
