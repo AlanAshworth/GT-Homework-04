@@ -1,3 +1,94 @@
+// DOM ------------------------------------------------------------------------
+const introContainerEl = document.getElementById("intro-container");
+const quizContainerEl = document.getElementById("question-container");
+const scoreContainerEl = document.getElementById("score-container");
+const startQuizButtonEl = document.getElementById("start-quiz");
+const questionEl = document.getElementById("question");
+const choice1El = document.getElementById("choice1");
+const choice2El = document.getElementById("choice2");
+const choice3El = document.getElementById("choice3");
+const choice4El = document.getElementById("choice4");
+const timerEl = document.getElementById("timer");
+
+var questionIndex = 0;
+var timeInterval;
+var timeLeft = 60;
+
+choice1El.addEventListener("click", function() {
+  checkAnswer(0);
+});
+choice2El.addEventListener("click", function() {
+  checkAnswer(1);
+});
+choice3El.addEventListener("click", function() {
+  checkAnswer(2);
+});
+choice4El.addEventListener("click", function() {
+  checkAnswer(3);
+});
+
+// Function Calls -------------------------------------------------------------
+triggerQuizChallenge();
+
+// Functions ------------------------------------------------------------------
+function triggerQuizChallenge() {
+  startQuizButtonEl.addEventListener("click", function() {
+    introContainerEl.setAttribute("style", "display: none");
+    quizContainerEl.setAttribute("style", "display: block");
+    renderQuestion();
+    countDown();
+  });
+}
+
+function renderQuestion() {
+  let currentQuestion = questions[questionIndex];
+  questionEl.innerHTML = "<h3>" + currentQuestion.question + "</h3>";
+  choice1El.innerHTML = currentQuestion.choices[0];
+  choice2El.innerHTML = currentQuestion.choices[1];
+  choice3El.innerHTML = currentQuestion.choices[2];
+  choice4El.innerHTML = currentQuestion.choices[3];
+}
+
+function checkAnswer(answer) {
+  if (answer === questions[questionIndex].correctAnswer) {
+    console.log(answer + " equals " + questions[questionIndex].correctAnswer);
+    // Do nothing with the setTimeout timer.
+  } else {
+    console.log(
+      answer + " does not equal " + questions[questionIndex].correctAnswer);
+    // Remove 15 seconds from the setTimeout timer.
+    timeLeft -= 15;
+  }
+  if (questionIndex >= questions.length - 1) {
+    // Stop the timer
+    clearInterval(timeInterval);
+    console.log(timeLeft);
+    // Show the next screen
+    triggerScoreBoard();
+  } else {
+    questionIndex++;
+  }
+  renderQuestion();
+}
+
+function triggerScoreBoard() {
+  quizContainerEl.setAttribute("style", "display: none");
+  scoreContainerEl.setAttribute("style", "display: block");
+}
+
+function countDown() {
+  timeInterval = setInterval(function() {
+    timeLeft--;
+    timerEl.textContent = "Time " + timeLeft;
+
+    if (timeLeft < 0) {
+      clearInterval(timeInterval);
+      timerEl.textContent = "Time";
+      triggerScoreBoard();
+    }
+  }, 1000);
+}
+
 // Objects --------------------------------------------------------------------
 var challengePane = {
   introduction:
@@ -39,91 +130,3 @@ var questions = [
     correctAnswer: 3
   }
 ];
-// DOM ------------------------------------------------------------------------
-const introContainer = document.getElementById("intro-container");
-const startContainer = document.getElementById("start-quiz");
-const quizContainer = document.getElementById("question-container");
-const scoreContainer = document.getElementById("score-container");
-const question = document.getElementById("question");
-const choice1 = document.getElementById("choice1");
-const choice2 = document.getElementById("choice2");
-const choice3 = document.getElementById("choice3");
-const choice4 = document.getElementById("choice4");
-const timer = document.getElementById("timer");
-
-// const lastQuestionIndex = questionSet.length - 1;
-let runningQuestionIndex = 0;
-
-
-startContainer.addEventListener("click", function(){
-  introContainer.setAttribute("style", "display: none");
-  quizContainer.setAttribute("style", "display: block");
-  renderQuestion();
-})
-
-choice1.addEventListener("click", function(){
-  checkAnswer(0);
-})
-choice2.addEventListener("click", function(){
-  checkAnswer(1);
-})
-choice3.addEventListener("click", function(){
-  checkAnswer(2);
-})
-choice4.addEventListener("click", function(){
-  checkAnswer(3);
-})
-
-// functions
-function renderQuestion(){
-    let currentQuestion = questions[runningQuestionIndex];
-    question.innerHTML = "<h3>" + currentQuestion.question + "</h3>";
-    choice1.innerHTML = currentQuestion.choices[0];
-    choice2.innerHTML = currentQuestion.choices[1];
-    choice3.innerHTML = currentQuestion.choices[2];
-    choice4.innerHTML = currentQuestion.choices[3];
-}
-
-function checkAnswer(answer){
-  console.log(questions[runningQuestionIndex].correctAnswer)
-  if(answer === questions[runningQuestionIndex].correctAnswer) {
-    console.log("Equal!");
-    // Do nothing with the setTimeout timer.
-  } else {
-    console.log("not equal!");
-    // Remove 15 seconds from the setTimeout timer.
-  }
-  if(runningQuestionIndex >= questions.length - 1){
-    // Stop the timer
-    // Show the next screen
-      quizContainer.setAttribute("style", "display: none");
-      scoreContainer.setAttribute("style", "display: block");
-  }else{
-    console.log(runningQuestionIndex);
-    runningQuestionIndex++
-  }
-    renderQuestion();
-}
-
-function nextQuestion(){
-  choice1.addEventListener("click", function(){
-    this.questions[runningQuestionIndex++];
-  })
-}
-
-// Interval -------------------------------------------------------------------
-// var timeEl = document.getElementById("#time");
-var timeCounter = 60;
-
-function countDownTimer() {
-    var timeInterval = setInterval(function() {
-        timeCounter--;
-        timer.textContent = timeCounter;
-
-        if (timeCounter === 0) {
-            clearInterval(timeInterval);
-        }
-    });
-}
-
-// Calls ----------------------------------------------------------------------

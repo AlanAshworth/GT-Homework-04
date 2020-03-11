@@ -1,15 +1,10 @@
 .container{
-    width: 100vw;
+    width: 500px;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
 
-}
-
-.btn-grid{
-    display: grid;
-    margin-right: 10rem;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
