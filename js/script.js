@@ -102,20 +102,6 @@ function checkAnswer(answer){
     console.log(runningQuestionIndex);
     runningQuestionIndex++
   }
-  // if (answer == questions.runningQuestionIndex.correctAnswer){
-  //       console.log(answer);
-  //       // answer is correct. add 10 seconds
-  //       // increment question
-  //   } else{
-  //     console.log(answer);
-  //     console.log("not correct!");
-  //       // answer is wrong. remove 15 seconds
-  //       // increment question
-  //   }
-    // if (runningQuestionIndex < lastQuestionIndex){
-    //     runningQuestionIndex++;
-    //     renderQuestion();
-    // }
     renderQuestion();
 }
 
@@ -126,15 +112,15 @@ function nextQuestion(){
 }
 
 // Interval -------------------------------------------------------------------
-var timeEl = document.getElementById("#time");
-var counter = 60;
+// var timeEl = document.getElementById("#time");
+var timeCounter = 60;
 
 function countDownTimer() {
     var timeInterval = setInterval(function() {
-        counter--;
-        timeEl.textContent = counter;
+        timeCounter--;
+        timer.textContent = timeCounter;
 
-        if (counter === 0) {
+        if (timeCounter === 0) {
             clearInterval(timeInterval);
         }
     });
