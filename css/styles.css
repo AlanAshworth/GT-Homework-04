@@ -4,7 +4,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
@@ -17,7 +16,7 @@
     color: #fff;
     background-color: rgb(102, 1, 102);
     border-color: rgb(102, 1, 102);
-    box-shadow: 0 0 0 0.2rem rgb(92, 8, 92));
+    box-shadow: 0 0 0 0.2rem rgb(92, 8, 92);
 }
 
 .btn-primary:hover {
