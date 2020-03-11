@@ -43,6 +43,7 @@ var questions = [
 const introContainer = document.getElementById("intro-container");
 const startContainer = document.getElementById("start-quiz");
 const quizContainer = document.getElementById("question-container");
+const scoreContainer = document.getElementById("score-container");
 const question = document.getElementById("question");
 const choice1 = document.getElementById("choice1");
 const choice2 = document.getElementById("choice2");
@@ -61,25 +62,16 @@ startContainer.addEventListener("click", function(){
 })
 
 choice1.addEventListener("click", function(){
-  
-  // runningQuestionIndex++;
-  // renderQuestion();
-  checkAnswer();
+  checkAnswer(0);
 })
 choice2.addEventListener("click", function(){
-  // runningQuestionIndex++;
-  // renderQuestion();
-  checkAnswer();
+  checkAnswer(1);
 })
 choice3.addEventListener("click", function(){
-  // runningQuestionIndex++;
-  // renderQuestion();
-  checkAnswer();
+  checkAnswer(2);
 })
 choice4.addEventListener("click", function(){
-  // runningQuestionIndex++;
-  // renderQuestion();
-  checkAnswer();
+  checkAnswer(3);
 })
 
 // functions
@@ -93,7 +85,23 @@ function renderQuestion(){
 }
 
 function checkAnswer(answer){
-  console.log(answer);
+  console.log(questions[runningQuestionIndex].correctAnswer)
+  if(answer === questions[runningQuestionIndex].correctAnswer) {
+    console.log("Equal!");
+    // Do nothing with the setTimeout timer.
+  } else {
+    console.log("not equal!");
+    // Remove 15 seconds from the setTimeout timer.
+  }
+  if(runningQuestionIndex >= questions.length - 1){
+    // Stop the timer
+    // Show the next screen
+      quizContainer.setAttribute("style", "display: none");
+      scoreContainer.setAttribute("style", "display: block");
+  }else{
+    console.log(runningQuestionIndex);
+    runningQuestionIndex++
+  }
   // if (answer == questions.runningQuestionIndex.correctAnswer){
   //       console.log(answer);
   //       // answer is correct. add 10 seconds
