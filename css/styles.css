@@ -1,5 +1,5 @@
 .container{
-    width: 500px;
+    width: 600px 1rem;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -49,5 +49,9 @@
 }
 
 #score-container {
+    display: none;
+}
+
+#highscores-container {
     display: none;
 }

@@ -75,7 +75,7 @@ function checkAnswer(answer) {
 function triggerScoreBoard() {
   quizContainerEl.setAttribute("style", "display: none");
   scoreContainerEl.setAttribute("style", "display: block");
-  scoreEl.textContent = "Your score is " + timeLeft;
+  scoreEl.textContent = "Your score is " + timeLeft + ".";
 }
 
 function countDownTimer() {
@@ -96,6 +96,9 @@ function deductTime(){
 }
 
 function stopCountDownTimer(){
+  if(timeLeft < 0){
+    timeLeft = 0;
+  }
   clearInterval(timeInterval);
 }
 
