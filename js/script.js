@@ -11,6 +11,7 @@ const choice4El = document.getElementById("choice4");
 const timerEl = document.getElementById("timer");
 const scoreEl = document.getElementById("displayScore");
 const submitEl = document.getElementById("submit");
+const initialsInput = document.getElementById("inputInitials");
 
 var questionIndex = 0;
 var timeInterval;
@@ -24,6 +25,7 @@ choice4El.addEventListener("click", function() {checkAnswer(3);});
 submitEl.addEventListener("click", function(event){
   event.preventDefault();
   console.log(event);
+  submitUserScore();
 });
 
 // Functions ------------------------------------------------------------------
@@ -84,11 +86,11 @@ function countDownTimer() {
   }, 1000);
 }
 
-function deductTime(){
+function deductTime() {
   timeLeft -= 15;
 }
 
-function stopCountDownTimer(){
+function stopCountDownTimer() {
   if(timeLeft < 0){
     timeLeft = 0;
   }
@@ -96,7 +98,10 @@ function stopCountDownTimer(){
 }
 
 function submitUserScore() {
-  //Todo: take 'timeLeft' score and store to localStorage.
+  //Todo: Take 'timeLeft' score and store to localStorage.
+  //      On 'click' proceed to 'highscores-container'.
+  console.log(user);
+  localStorage.setItem("user", JSON.stringify(user));
 }
 // Objects --------------------------------------------------------------------
 var questions = [
@@ -134,3 +139,8 @@ var questions = [
     correctAnswer: 3
   }
 ];
+
+var user = {
+  initials: initialsInput.value.trim(),
+  score: timeLeft
+};
