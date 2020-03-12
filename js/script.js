@@ -10,36 +10,29 @@ const choice3El = document.getElementById("choice3");
 const choice4El = document.getElementById("choice4");
 const timerEl = document.getElementById("timer");
 const scoreEl = document.getElementById("displayScore");
+const submitEl = document.getElementById("submit");
 
 var questionIndex = 0;
 var timeInterval;
 var timeLeft = 60;
 
-choice1El.addEventListener("click", function() {
-  checkAnswer(0);
+startQuizButtonEl.addEventListener("click", triggerQuizChallenge);
+choice1El.addEventListener("click", function() {checkAnswer(0);});
+choice2El.addEventListener("click", function() {checkAnswer(1);});
+choice3El.addEventListener("click", function() {checkAnswer(2);});
+choice4El.addEventListener("click", function() {checkAnswer(3);});
+submitEl.addEventListener("click", function(event){
+  event.preventDefault();
+  console.log(event);
 });
-choice2El.addEventListener("click", function() {
-  checkAnswer(1);
-});
-choice3El.addEventListener("click", function() {
-  checkAnswer(2);
-});
-choice4El.addEventListener("click", function() {
-  checkAnswer(3);
-});
-
-// Function Calls -------------------------------------------------------------
-triggerQuizChallenge();
 
 // Functions ------------------------------------------------------------------
 function triggerQuizChallenge() {
-  startQuizButtonEl.addEventListener("click", function() {
     introContainerEl.setAttribute("style", "display: none");
     quizContainerEl.setAttribute("style", "display: block");
     renderQuestion();
     countDownTimer();
-  });
-}
+}   
 
 function renderQuestion() {
   let currentQuestion = questions[questionIndex];
@@ -102,6 +95,9 @@ function stopCountDownTimer(){
   clearInterval(timeInterval);
 }
 
+function submitUserScore() {
+  //Todo: take 'timeLeft' score and store to localStorage.
+}
 // Objects --------------------------------------------------------------------
 var questions = [
   {
